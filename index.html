@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hijjaze Personal</title>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <style>
+ * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            width: 100%;
+            /* max-width: 400px; */
+            padding: 20px;
+        }
+
+        .login-container, .main-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 40px 30px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            transform: translateY(0);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-container::before, .main-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: rotate 8s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .main-container {
+            /* max-width: 1200px; */
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(248, 249, 250, 0.95));
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .fade-out {
+            animation: fadeOut 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+        }
+
+        .logo {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: logoFloat 3s ease-in-out infinite, logoGlow 2s ease-in-out infinite alternate;
+            position: relative;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        @keyframes logoFloat {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            33% {
+                transform: translateY(-8px) rotate(5deg);
+            }
+            66% {
+                transform: translateY(4px) rotate(-3deg);
+            }
+        }
+
+        @keyframes logoGlow {
+            from {
+                box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            }
+            to {
+                box-shadow: 0 8px 35px rgba(102, 126, 234, 0.6), 0 0 20px rgba(240, 147, 251, 0.4);
+            }
+        }
+
+        .logo::before {
+            content: '🔐';
+            font-size: 35px;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.4);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 20px rgba(102, 126, 234, 0);
+            }
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e1e8ed;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #fff;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .divider {
+            position: relative;
+            margin: 30px 0;
+            text-align: center;
+            color: #999;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #e1e8ed;
+        }
+
+        .divider span {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 0 20px;
+        }
+
+        .google-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: white;
+            border: 2px solid #e1e8ed;
+            color: #333;
+            padding: 15px;
+            border-radius: 12px;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .google-btn:hover {
+            border-color: #4285f4;
+            box-shadow: 0 5px 15px rgba(66, 133, 244, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .google-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .error-message {
+            background: #fee;
+            color: #c33;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #c33;
+            display: none;
+        }
+
+        .success-message {
+            background: #efe;
+            color: #363;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #363;
+            display: none;
+        }
+
+        /* Main Page Styles */
+        .main-header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 30px 0;
+            border-bottom: 2px solid rgba(102, 126, 234, 0.1);
+            position: relative;
+        }
+
+        .main-header::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+            border-radius: 2px;
+        }
+
+        .welcome-section {
+            margin-bottom: 20px;
+        }
+
+        .welcome-section h1 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 36px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: textShimmer 3s ease-in-out infinite;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .user-avatar {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .user-details h2 {
+            margin: 0;
+            font-size: 24px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .user-details p {
+            margin: 0;
+            color: #666;
+            font-size: 16px;
+        }
+
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(240, 147, 251, 0.1));
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        @keyframes textShimmer {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .logout-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #ff4757;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: #ff3742;
+            transform: translateY(-2px);
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .back-btn:hover {
+            background: #5a6fd8;
+            transform: translateY(-2px);
+        }
+
+        .cancel-btn {
+            background: #95a5a6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .cancel-btn:hover {
+            background: #7f8c8d;
+            transform: translateY(-2px);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            justify-content: center;
+        }
+
+        .files-section {
+            margin-top: 30px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: '📁';
+            font-size: 28px;
+        }
+
+        .files-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .file-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(248, 249, 250, 0.95));
+            border-radius: 20px;
+            padding: 35px 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid rgba(102, 126, 234, 0.1);
+            backdrop-filter: blur(10px);
+            animation: cardFloat 8s ease-in-out infinite;
+        }
+
+        @keyframes cardFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .file-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            transition: left 0.5s;
+        }
+
+        .file-card:hover::before {
+            left: 100%;
+        }
+
+        .file-card:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 30px 60px rgba(102, 126, 234, 0.25);
+            border-color: rgba(102, 126, 234, 0.3);
+            animation: none;
+        }
+
+        .file-card:nth-child(odd) {
+            animation-delay: -2s;
+        }
+
+        .file-card:nth-child(even) {
+            animation-delay: -4s;
+        }
+
+        .file-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .file-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            animation: float 4s ease-in-out infinite;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .file-info {
+            flex: 1;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .file-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 5px;
+            line-height: 1.2;
+        }
+
+        .file-description {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .file-size {
+            color: #999;
+            font-size: 13px;
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+
+        .download-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            font-size: 16px;
+            min-width: 140px;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .download-btn:active {
+            transform: scale(0.98);
+        }
+
+        .download-btn.downloading {
+            background: #ffa726;
+            pointer-events: none;
+        }
+
+        .download-btn.downloaded {
+            background: #4caf50;
+        }
+
+        .download-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.3);
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        /* Enhanced Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            .login-container, .main-container {
+                padding: 25px 20px;
+                margin: 5px;
+                border-radius: 20px;
+            }
+
+            .files-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                margin-top: 25px;
+            }
+
+            .file-card {
+                padding: 20px 15px;
+                border-radius: 15px;
+            }
+
+            .file-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+                margin-bottom: 15px;
+            }
+
+            h1 {
+                font-size: 22px;
+            }
+
+            .welcome-section h1 {
+                font-size: 26px;
+            }
+
+            .logo {
+                width: 70px;
+                height: 70px;
+                margin-bottom: 20px;
+            }
+
+            .logout-btn, .back-btn {
+                top: 15px;
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .logout-btn {
+                right: 15px;
+            }
+            
+            .back-btn {
+                left: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 5px;
+            }
+
+            .login-container, .main-container {
+                padding: 20px 15px;
+                margin: 0;
+            }
+
+            .file-card {
+                padding: 15px 10px;
+            }
+
+            .form-control {
+                padding: 12px 15px;
+                font-size: 14px;
+            }
+
+            .btn {
+                padding: 12px;
+                font-size: 14px;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+
+            .welcome-section h1 {
+                font-size: 24px;
+            }
+
+            .files-grid {
+                gap: 12px;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+</style>
+<body>
+    
+ <!-- Login Container -->
+    <div class="container">
+        <div id="loginContainer" class="login-container fade-in">
+            <div class="logo"></div>
+            <h1>Document wallet (SPD wallet)</h1>
+            <p class="subtitle">only administrator can log in this website</p>
+            
+            <div id="errorMessage" class="error-message"></div>
+            <div id="successMessage" class="success-message"></div>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="form-control" placeholder="Enter your password" required>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">
+                    <span id="loginText">Sign In</span>
+                    <span id="loginLoading" class="loading" style="display: none;"></span>
+                </button>
+                
+                <div class="button-group">
+                    <button type="button" class="cancel-btn" id="cancelBtn">Cancel</button>
+                </div>
+            </form>
+            
+            <div class="divider">
+                <span>OR</span>
+            </div>
+            
+            <div id="g_id_onload"
+                 data-client_id="88331635303-4o92th7485u18fbg53o1d851am0m5i0b.apps.googleusercontent.com"
+                 data-callback="handleCredentialResponse"
+                 data-auto_prompt="false">
+            </div>
+            
+            <button id="googleSignIn" class="google-btn">
+                <svg class="google-icon" viewBox="0 0 24 24">
+                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                </svg>
+                Continue with Google
+            </button>
+        </div>
+        
+        <!-- Main Container -->
+        <div id="mainContainer" class="main-container hidden">
+            <button id="backBtn" class="back-btn">
+                ← Back
+            </button>
+            <button id="logoutBtn" class="logout-btn">Logout</button>
+            
+            <div class="main-header">
+                <div class="welcome-section">
+                    <h1>Welcome, Kashaf!</h1>
+                </div>
+                
+                <div class="user-info">
+                    <div class="user-avatar">KH</div>
+                    <div class="user-details">
+                        <h2>Kashaf Hijjaze</h2>
+                        <p>Personal File Portal</p>
+                    </div>
+                </div>
+                
+                <div class="stats-section">
+                    <div class="stat-card">
+                        <div class="stat-number">5</div>
+                        <div class="stat-label">Total Files</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">29.5</div>
+                        <div class="stat-label">Total MB</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Secure</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="files-section">
+                <h3 class="section-title">Your Files</h3>
+                
+                <div class="files-grid">
+                    <div class="file-card" data-file="family_certificate.zi" style="animation-delay: 0.1s;">
+                        <div class="file-header">
+                            <div class="file-icon">📋</div>
+                            <div class="file-info">
+                                <div class="file-name">Family Certificate</div>
+                                <div class="file-description">Official family documentation</div>
+                                <div class="file-size">2.3 MB • ZIP Archive</div>
+                            </div>
+                        </div>
+                        <div class="download-section">
+                         <button onclick="downloadZip()" class="download-btn">
+                                📥 Download
+                                <div class="download-progress"></div>
+                            </button>
+                            <script>
+  function downloadZip() {
+    const link = document.createElement('a');
+    link.href = 'RAR.zip';
+    link.download = 'RAR.zip';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+</script>
+                        </div>
+                    </div>
+                    
+                    <div class="file-card" data-file="Rar file.zip" style="animation-delay: 0.2s;">
+                        <div class="file-header">
+                            <div class="file-icon">📄</div>
+                            <div class="file-info">
+                                <div class="file-name">Form Band 2MC 9th</div>
+                                <div class="file-description">Academic form and records</div>
+                                <div class="file-size">1.8 MB • ZIP Archive</div>
+                            </div>
+                        </div>
+                        <div class="download-section">
+                            <button onclick="downloadDmc()" class="download-btn">
+                                📥 Download
+                                <div class="download-progress"></div>
+                            </button>
+                            <script>
+  function downloadDmc() {
+    const link = document.createElement('a');
+    link.href = 'form_Band_2mc_9th.zip';
+    link.download = 'form_Band_2mc_9th.zip';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+</script>
+                        </div>
+                    </div>
+                    
+                    <div class="file-card" data-file="caligraphy.zip" style="animation-delay: 0.3s;">
+                        <div class="file-header">
+                            <div class="file-icon">✍️</div>
+                            <div class="file-info">
+                                <div class="file-name">Form B AND DMC</div>
+                                <div class="file-description">Art and writing samples</div>
+                                <div class="file-size">4.2 MB • ZIP Archive</div>
+                            </div>
+                        </div>
+                        <div class="download-section">
+                                                    <div class="download-section">
+                         <button onclick="downloadDmc()" class="download-btn">
+                                📥 Download
+                                <div class="download-progress"></div>
+                            </button>
+                            <script>
+  function downloadDmc() {
+    const link = document.createElement('a');
+    link.href = 'personal_picture.zip';
+    link.download = 'personal_picture.zip';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+</script>
+                        </div>
+                    </div>
+                    
+                    <div class="file-card" data-file="personal_picture.zip" style="animation-delay: 0.2s;">
+                        <div class="file-header">
+                            <div class="file-icon">📄</div>
+                            <div class="file-info">
+                                <div class="file-name">pictures</div>
+                                <div class="file-description">my personal pictures</div>
+                                <div class="file-size">1.8 MB • ZIP Archive</div>
+                            </div>
+                        </div>
+                        <div class="download-section">
+                            <button class="download-btn">
+                                📥 Download
+                                <div class="download-progress"></div>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="file-card" data-file="RAR.zip" style="animation-delay: 0.5s;">
+                        <div class="file-header">
+                            <div class="file-icon">🗜️</div>
+                            <div class="file-info">
+                                <div class="file-name">RAR Archive</div>
+                                <div class="file-description">Compressed file collection</div>
+                                <div class="file-size">8.7 MB • RAR Archive</div>
+                            </div>
+                        </div>
+                        <div class="download-section">
+                            <button class="download-btn">
+                                📥 Download
+                                <div class="download-progress"></div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+</body>
+<script>
+     
+// Configuration
+        const AUTHORIZED_EMAIL = 'kashafhijjaze@gmail.com';
+        const AUTHORIZED_PASSWORD = '123qweasd';
+ // DOM Elements
+        const loginContainer = document.getElementById('loginContainer');
+        const mainContainer = document.getElementById('mainContainer');
+        const loginForm = document.getElementById('loginForm');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const errorMessage = document.getElementById('errorMessage');
+        const successMessage = document.getElementById('successMessage');
+        const loginText = document.getElementById('loginText');
+        const loginLoading = document.getElementById('loginLoading');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const backBtn = document.getElementById('backBtn');
+        const cancelBtn = document.getElementById('cancelBtn');
+        const googleSignInBtn = document.getElementById('googleSignIn');
+        
+        // Session Management
+        function setSession(email) {
+            sessionStorage.setItem('userSession', JSON.stringify({
+                email: email,
+                loginTime: new Date().toISOString()
+            }));
+        }
+        
+        function getSession() {
+            const session = sessionStorage.getItem('userSession');
+            return session ? JSON.parse(session) : null;
+        }
+        
+        function clearSession() {
+            sessionStorage.removeItem('userSession');
+        }
+        
+        // Check if user is already logged in
+        function checkSession() {
+            const session = getSession();
+            if (session && session.email === AUTHORIZED_EMAIL) {
+                showMainPage();
+            }
+        }
+        
+        // Display Functions
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+            successMessage.style.display = 'none';
+            
+            setTimeout(() => {
+                errorMessage.style.display = 'none';
+            }, 5000);
+        }
+        
+        function showSuccess(message) {
+            successMessage.textContent = message;
+            successMessage.style.display = 'block';
+            errorMessage.style.display = 'none';
+            
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 3000);
+        }
+        
+        function showLoading(show) {
+            loginText.style.display = show ? 'none' : 'inline';
+            loginLoading.style.display = show ? 'inline-block' : 'none';
+        }
+        
+        // Navigation Functions
+        function showMainPage() {
+            loginContainer.classList.add('fade-out');
+            
+            setTimeout(() => {
+                loginContainer.classList.add('hidden');
+                mainContainer.classList.remove('hidden');
+                mainContainer.classList.add('fade-in');
+            }, 500);
+        }
+        
+        function showLoginPage() {
+            mainContainer.classList.add('fade-out');
+            
+            setTimeout(() => {
+                mainContainer.classList.add('hidden');
+                loginContainer.classList.remove('hidden', 'fade-out');
+                loginContainer.classList.add('fade-in');
+                
+                // Reset form
+                loginForm.reset();
+                errorMessage.style.display = 'none';
+                successMessage.style.display = 'none';
+            }, 500);
+        }
+        
+        // Email/Password Login
+        function validateLogin(email, password) {
+            if (email !== AUTHORIZED_EMAIL) {
+                return 'Access denied. This account is not authorized.';
+            }
+            
+            if (password !== AUTHORIZED_PASSWORD) {
+                return 'Invalid password. Please try again.';
+            }
+            
+            return null;
+        }
+        
+        loginForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = emailInput.value.trim();
+            const password = passwordInput.value;
+            
+            showLoading(true);
+            
+            // Simulate authentication delay
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            const error = validateLogin(email, password);
+            
+            if (error) {
+                showError(error);
+                showLoading(false);
+                return;
+            }
+            
+            showSuccess('Login successful! Redirecting...');
+            setSession(email);
+            
+            setTimeout(() => {
+                showLoading(false);
+                showMainPage();
+            }, 1500);
+        });
+        
+        // Google Sign-In
+        window.handleCredentialResponse = function(response) {
+            try {
+                // Decode JWT token to get user info
+                const payload = JSON.parse(atob(response.credential.split('.')[1]));
+                const email = payload.email;
+                
+                if (email !== AUTHORIZED_EMAIL) {
+                    showError('Access denied. This Google account is not authorized.');
+                    return;
+                }
+                
+                showSuccess('Google Sign-In successful! Redirecting...');
+                setSession(email);
+                
+                setTimeout(() => {
+                    showMainPage();
+                }, 1500);
+                
+            } catch (error) {
+                console.error('Google Sign-In error:', error);
+                showError('Google Sign-In failed. Please try again.');
+            }
+        };
+         // Initialize Google Sign-In button
+        function initGoogleSignIn() {
+            if (typeof google !== 'undefined' && google.accounts) {
+                google.accounts.id.initialize({
+                    client_id: "88331635303-4o92th7485u18fbg53o1d851am0m5i0b.apps.googleusercontent.com",
+                    callback: handleCredentialResponse
+                });
+                
+                google.accounts.id.renderButton(
+                    googleSignInBtn,
+                    {
+                        theme: "outline",
+                        size: "large",
+                        width: "100%",
+                        text: "continue_with"
+                    }
+                );
+            } else {
+                // Fallback button if Google API fails to load
+                googleSignInBtn.addEventListener('click', function() {
+                    showError('Google Sign-In is temporarily unavailable. Please  contact to kashfurrhaman.only kashfurrahman can login to this website.');
+                });
+            }
+        }
+         // Navigation functionality
+        logoutBtn.addEventListener('click', function() {
+            clearSession();
+            showLoginPage();
+        });
+        
+        // Back button functionality
+        backBtn.addEventListener('click', function() {
+            showLoginPage();
+        });
+        
+        // Cancel button functionality
+        cancelBtn.addEventListener('click', function() {
+            // Clear the form
+            loginForm.reset();
+            errorMessage.style.display = 'none';
+            successMessage.style.display = 'none';
+            showLoading(false);
+            
+            // Show a message
+            showSuccess('Login cancelled');
+        });
+        
+        // Initialize application
+        document.addEventListener('DOMContentLoaded', function() {
+            checkSession();
+            
+            // Initialize Google Sign-In when API loads
+            if (typeof google !== 'undefined') {
+                initGoogleSignIn();
+            } else {
+                // Wait for Google API to load
+                window.addEventListener('load', function() {
+                    setTimeout(initGoogleSignIn, 1000);
+                });
+            }
+        });
+        
+        // Handle browser back/forward
+        window.addEventListener('popstate', function() {
+            checkSession();
+        });
+        
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Escape key to logout from main page
+            if (e.key === 'Escape' && !mainContainer.classList.contains('hidden')) {
+                logoutBtn.click();
+            }
+            
+            // Enter key to submit login form
+            if (e.key === 'Enter' && !loginContainer.classList.contains('hidden')) {
+                if (document.activeElement === emailInput || document.activeElement === passwordInput) {
+                    loginForm.dispatchEvent(new Event('submit'));
+                }
+            }
+        });
+        
+        // Add some interactive hover effects
+        document.querySelectorAll('.file-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+        
+        // Prevent right-click context menu on sensitive elements
+        [loginContainer, mainContainer].forEach(element => {
+            element.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+            });
+        });
+        
+        // Auto-focus email input on page load
+        setTimeout(() => {
+            if (!loginContainer.classList.contains('hidden')) {
+                emailInput.focus();
+            }
+        }, 500);
+</script>
+</html>
