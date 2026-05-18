@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hijjaze AI Image Studio | AI Image Generator, 4K Upscaler & Photo Enhancer</title>
+  <meta name="description" content="Generate AI images, enhance blurry photos to 2K, 3K, and 4K Ultra HD, remove backgrounds, restore old photos, and sharpen details with Hijjaze AI Image Studio.">
+  <meta name="keywords" content="AI image generator, AI image upscaler, 4K image enhancer, AI photo enhancer, Real-ESRGAN, Stable Diffusion, background remover, photo restorer">
+  <link rel="canonical" href="{{ site_url }}/">
+  <meta property="og:title" content="Hijjaze AI Image Studio">
+  <meta property="og:description" content="Premium AI image generation and real photo enhancement platform.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ site_url }}/">
+  <meta property="og:image" content="{{ site_url }}/static/images/og-preview.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Hijjaze AI Image Studio">
+  <meta name="twitter:description" content="Generate, enhance, upscale, restore, and download stunning AI images.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Organization","name":"Hijjaze AI Image Studio","url":"{{ site_url }}","sameAs":[],"logo":"{{ site_url }}/static/icons/logo.png"}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Product","name":"Hijjaze AI Image Studio","description":"AI image generator, 4K photo enhancer, upscaler, background remover, and restoration suite.","brand":{"@type":"Brand","name":"Hijjaze AI"},"offers":{"@type":"Offer","price":"19","priceCurrency":"USD"}}
+  </script>
+</head>
+<body>
+  <div class="loader" id="loader"><span></span><p>Booting Hijjaze neural canvas</p></div>
+  <nav class="navbar navbar-expand-lg fixed-top studio-nav">
+    <div class="container">
+      <a class="navbar-brand" href="#home"><span class="brand-mark">H</span> Hijjaze AI</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"><i class="fa-solid fa-bars"></i></button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link" href="#generator">Generator</a></li>
+          <li class="nav-item"><a class="nav-link" href="#enhancer">Enhancer</a></li>
+          <li class="nav-item"><a class="nav-link" href="#tools">AI Tools</a></li>
+          <li class="nav-item"><a class="nav-link" href="#pricing">Pricing</a></li>
+          <li class="nav-item"><a class="nav-link" href="#dashboard">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          <li class="nav-item"><button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><i class="fa-solid fa-moon"></i></button></li>
+          <li class="nav-item"><a class="btn btn-neon btn-sm" href="{{ url_for('login') }}">Login</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main id="home">
+    <section class="hero section-pad">
+      <div class="container">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-6">
+            <p class="eyebrow">Stable Diffusion + Real-ESRGAN + OpenCV pipeline</p>
+            <h1 class="display-2 fw-black">Hijjaze AI Image Studio</h1>
+            <p class="hero-copy">Generate cinematic images from prompts, restore old photos, remove backgrounds, and upscale blurry uploads into crisp 2K, 3K, and 4K Ultra HD results.</p>
+            <div class="hero-actions">
+              <a href="#generator" class="btn btn-neon"><i class="fa-solid fa-wand-magic-sparkles"></i> Generate Image</a>
+              <a href="#enhancer" class="btn btn-glass"><i class="fa-solid fa-up-right-and-down-left-from-center"></i> Enhance Image</a>
+            </div>
+            <div class="trusted">
+              <span>Trusted creative workflow for</span>
+              <strong>120K+</strong><span> creators, stores, agencies, and restorers</span>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="ai-preview glass-card">
+              <div class="preview-top"><span></span><span></span><span></span><b>Live AI Preview</b></div>
+              <div class="orbital-canvas">
+                <div class="neural-ring ring-a"></div>
+                <div class="neural-ring ring-b"></div>
+                <div class="preview-image before"><span>Blurred input</span></div>
+                <div class="preview-image after"><span>4K enhanced</span></div>
+              </div>
+              <div class="progress-stack">
+                <label>Super-resolution</label><div><span style="width:94%"></span></div>
+                <label>Noise removal</label><div><span style="width:88%"></span></div>
+                <label>Face detail</label><div><span style="width:82%"></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats-strip">
+      <div class="container stat-grid">
+        <div><b data-counter="8">0</b><span>AI tools</span></div>
+        <div><b data-counter="4">0</b><span>Upscale modes</span></div>
+        <div><b data-counter="96">0</b><span>Quality score</span></div>
+        <div><b data-counter="120">0</b><span>K users</span></div>
+      </div>
+    </section>
+
+    <section id="about" class="section-pad">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Commercial AI workflow</p>
+          <h2>Everything for image creation, repair, and delivery.</h2>
+        </div>
+        <div class="feature-grid">
+          <article class="glass-card"><i class="fa-solid fa-image"></i><h3>Text-to-image</h3><p>Prompt realistic, anime, fantasy, cyberpunk, 3D, Pixar-like, oil painting, and sketch outputs.</p></article>
+          <article class="glass-card"><i class="fa-solid fa-expand"></i><h3>2K / 3K / 4K upscale</h3><p>Upload photos and run super-resolution, denoise, sharpening, color correction, and detail recovery.</p></article>
+          <article class="glass-card"><i class="fa-solid fa-eraser"></i><h3>Background removal</h3><p>Cut subjects from product photos and portraits using rembg when installed, with a fallback pipeline.</p></article>
+          <article class="glass-card"><i class="fa-solid fa-clock-rotate-left"></i><h3>Photo restoration</h3><p>Improve old scans with contrast repair, blur removal, denoise, and restoration-friendly color balancing.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="generator" class="section-pad tool-section">
+      <div class="container">
+        <div class="tool-layout">
+          <aside class="tool-sidebar glass-card">
+            <h2>AI Image Generator</h2>
+            <label>Prompt</label>
+            <textarea id="prompt" rows="5" placeholder="A cinematic neon city on Mars, rain, ultra detailed"></textarea>
+            <label>Negative prompt</label>
+            <input id="negativePrompt" placeholder="blurry, low quality, bad anatomy">
+            <label>Style</label>
+            <select id="style">
+              <option value="realistic">Realistic</option><option value="anime">Anime</option><option value="cyberpunk">Cyberpunk</option><option value="fantasy">Fantasy</option><option value="3d">3D</option><option value="pixar">Pixar</option><option value="oil">Oil painting</option><option value="sketch">Sketch</option>
+            </select>
+            <label>Image ratio</label>
+            <div class="segmented" id="ratioGroup"><button data-ratio="1:1" class="active">1:1</button><button data-ratio="16:9">16:9</button><button data-ratio="9:16">9:16</button><button data-ratio="4:3">4:3</button></div>
+            <div class="switch-row"><span>HD generation</span><input type="checkbox" checked></div>
+            <div class="switch-row"><span>Ultra HD generation</span><input type="checkbox"></div>
+            <button id="generateBtn" class="btn btn-neon w-100"><i class="fa-solid fa-sparkles"></i> Generate</button>
+            <div class="mini-actions"><button id="randomPrompt">Random prompt</button><button id="copyPrompt">Copy prompt</button></div>
+          </aside>
+          <section class="result-panel glass-card">
+            <div class="panel-head"><h3>Generated result</h3><span id="generationEngine">Ready</span></div>
+            <div class="skeleton result-frame" id="generatedFrame"><span>Your AI image appears here</span></div>
+            <a id="downloadGenerated" class="btn btn-glass disabled" download><i class="fa-solid fa-download"></i> Download image</a>
+            <div><h4>Prompt history</h4><ul id="promptHistory" class="history-list"></ul></div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section id="enhancer" class="section-pad tool-section">
+      <div class="container">
+        <div class="section-head"><p class="eyebrow">Real image enhancement</p><h2>Enhance blurry uploads into 2K, 3K, and 4K Ultra HD.</h2></div>
+        <div class="tool-layout">
+          <aside class="tool-sidebar glass-card">
+            <h3>AI Image Enhancer</h3>
+            <label class="upload-box" id="uploadBox"><input type="file" id="enhanceInput" accept="image/*"><i class="fa-solid fa-cloud-arrow-up"></i><span>Drag, drop, or choose image</span></label>
+            <label>Enhance to</label>
+            <div class="segmented" id="targetGroup"><button data-target="2k" class="active">2K</button><button data-target="3k">3K</button><button data-target="4k">4K</button></div>
+            <div class="check-grid">
+              <label><input type="checkbox" id="denoise" checked> Remove noise</label>
+              <label><input type="checkbox" id="faces" checked> Sharpen faces</label>
+              <label><input type="checkbox" id="restore" checked> Restore details</label>
+              <label><input type="checkbox" checked> Color correction</label>
+            </div>
+            <button id="enhanceBtn" class="btn btn-neon w-100"><i class="fa-solid fa-bolt"></i> Enhance now</button>
+          </aside>
+          <section class="result-panel glass-card">
+            <div class="panel-head"><h3>Before / after compare</h3><span id="enhanceEngine">Waiting for image</span></div>
+            <div class="compare" id="compareBox"><div class="before-pane">Before</div><div class="after-pane" id="afterPane">After</div><input type="range" min="0" max="100" value="50" id="compareRange"></div>
+            <div class="zoom-row"><label>Zoom preview</label><input type="range" min="1" max="2" step=".1" value="1" id="zoomRange"></div>
+            <a id="downloadEnhanced" class="btn btn-glass disabled" download><i class="fa-solid fa-download"></i> Download HD image</a>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section id="tools" class="section-pad">
+      <div class="container">
+        <div class="section-head"><p class="eyebrow">Advanced AI tools</p><h2>Production-ready tools for creators and businesses.</h2></div>
+        <div class="tools-grid">
+          <article class="glass-card tool-card"><i class="fa-solid fa-scissors"></i><h3>Background remover</h3><p>Transparent cutouts for products and portraits.</p><button id="bgRemoveBtn">Run on enhancer image</button></article>
+          <article class="glass-card tool-card"><i class="fa-solid fa-object-ungroup"></i><h3>Object remover</h3><p>Mask-based cleanup route prepared for inpainting models.</p></article>
+          <article class="glass-card tool-card"><i class="fa-solid fa-user-astronaut"></i><h3>Portrait enhancer</h3><p>Face-aware sharpening, contrast, and detail tuning.</p></article>
+          <article class="glass-card tool-card"><i class="fa-solid fa-palette"></i><h3>Anime converter</h3><p>Style prompts for anime and illustration outputs.</p></article>
+          <article class="glass-card tool-card"><i class="fa-solid fa-pencil"></i><h3>Sketch converter</h3><p>Convert concepts into clean sketch-style generations.</p></article>
+          <article class="glass-card tool-card"><i class="fa-solid fa-fill-drip"></i><h3>AI colorizer</h3><p>Restoration-ready color and contrast pipeline.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="styles" class="section-pad">
+      <div class="container">
+        <div class="section-head"><p class="eyebrow">AI Art Styles</p><h2>Realistic art directions for every campaign.</h2></div>
+        <div class="style-strip"><span>Realistic</span><span>Anime</span><span>Cyberpunk</span><span>Fantasy</span><span>3D</span><span>Pixar</span><span>Oil painting</span><span>Sketch</span></div>
+      </div>
+    </section>
+
+    <section id="pricing" class="section-pad">
+      <div class="container">
+        <div class="section-head"><p class="eyebrow">Pricing</p><h2>Scale from casual creation to studio pipelines.</h2></div>
+        <div class="pricing-grid">
+          <article class="price-card glass-card"><h3>Starter</h3><b>$0</b><p>Try generation, previews, and basic enhancement.</p><a href="{{ url_for('register') }}" class="btn btn-glass">Start free</a></article>
+          <article class="price-card glass-card featured"><h3>Pro Studio</h3><b>$19</b><p>4K upscales, HD downloads, prompt history, and priority API usage.</p><a href="{{ url_for('register') }}" class="btn btn-neon">Go Pro</a></article>
+          <article class="price-card glass-card"><h3>Business</h3><b>$99</b><p>Team dashboard, storage management, API usage, and dedicated deployment.</p><a href="#contact" class="btn btn-glass">Contact sales</a></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="dashboard" class="section-pad dashboard-section">
+      <div class="container">
+        <div class="dashboard-shell glass-card">
+          <aside class="dash-sidebar"><b>Dashboard</b><a>Generated history</a><a>Enhanced history</a><a>Downloads</a><a>Favorites</a><a>Profile</a><a>Settings</a><a>API usage</a><a>Storage</a></aside>
+          <div class="dash-main">
+            <div class="dash-cards"><div><b>248</b><span>Generated images</span></div><div><b>91</b><span>Enhanced images</span></div><div><b>64</b><span>Downloads</span></div><div><b>12.4GB</b><span>Storage used</span></div></div>
+            <div class="activity-list"><p>Favorite creation saved</p><p>4K upscale completed</p><p>API key usage at 62%</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="section-pad">
+      <div class="container narrow">
+        <div class="section-head"><p class="eyebrow">FAQ</p><h2>Questions creators ask before launch.</h2></div>
+        <div class="accordion" id="faqAcc">
+          <div class="accordion-item"><h3><button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#q1">Does this support real AI enhancement?</button></h3><div id="q1" class="accordion-collapse collapse show" data-bs-parent="#faqAcc"><div class="accordion-body">Yes. The routes are ready for Real-ESRGAN, OpenCV, Pillow, and rembg. OpenCV/Pillow run immediately; heavier models can be installed and configured.</div></div></div>
+          <div class="accordion-item"><h3><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q2">Can I generate images with Stable Diffusion?</button></h3><div id="q2" class="accordion-collapse collapse" data-bs-parent="#faqAcc"><div class="accordion-body">Set a HuggingFace token or local Diffusers model in environment variables. Without keys, the app creates branded preview images so the UI still works.</div></div></div>
+          <div class="accordion-item"><h3><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q3">Is it mobile responsive?</button></h3><div id="q3" class="accordion-collapse collapse" data-bs-parent="#faqAcc"><div class="accordion-body">Yes. Grids, sidebars, tool panels, and compare previews collapse cleanly for phones, tablets, laptops, and large screens.</div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section-pad">
+      <div class="container contact-grid">
+        <div><p class="eyebrow">Contact</p><h2>Build your AI image pipeline with Hijjaze.</h2><p>For deployment, API integration, OAuth, SMTP verification, storage, and model hosting, connect this UI to your production services.</p></div>
+        <form class="glass-card contact-form"><input placeholder="Name"><input placeholder="Email"><textarea rows="4" placeholder="Tell us about your project"></textarea><button class="btn btn-neon" type="button">Send message</button></form>
+      </div>
+    </section>
+
+    <section id="privacy" class="legal section-pad">
+      <div class="container narrow"><h2>Privacy Policy</h2><p>Uploaded files are stored in the local uploads folder for demo history. In production, add authenticated storage, retention rules, consent, audit logs, and deletion controls.</p><h2>Terms & Conditions</h2><p>Users are responsible for image rights, prompt content, and compliance with local law. Production AI models should include safety filters and abuse monitoring.</p></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div><a class="navbar-brand" href="#home"><span class="brand-mark">H</span> Hijjaze AI</a><p>AI image generation, enhancement, restoration, and commercial creative tooling.</p></div>
+      <div><b>Platform</b><a href="#generator">Generator</a><a href="#enhancer">Enhancer</a><a href="#tools">AI tools</a></div>
+      <div><b>Company</b><a href="#about">About</a><a href="#pricing">Pricing</a><a href="#contact">Contact</a></div>
+      <div><b>Legal</b><a href="#privacy">Privacy Policy</a><a href="#privacy">Terms & Conditions</a><a href="/sitemap.xml">Sitemap</a></div>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does this support real AI enhancement?","acceptedAnswer":{"@type":"Answer","text":"Yes, the app includes routes for OpenCV, Pillow, Real-ESRGAN-ready upscaling, and rembg background removal."}},{"@type":"Question","name":"Can I generate images with Stable Diffusion?","acceptedAnswer":{"@type":"Answer","text":"Yes. Add a HuggingFace API token or configure a local Diffusers model for real text-to-image generation."}}]}
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

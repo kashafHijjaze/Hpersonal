@@ -1,0 +1,13 @@
+flask
+fastapi
+opencv-python
+pillow
+torch
+transformers
+diffusers
+realesrgan
+numpy
+rembg
+uvicorn
+python-dotenv
+requests
